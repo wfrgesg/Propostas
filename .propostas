@@ -4,11 +4,17 @@ using namespace std;
 
 int main()
 {
-
+    vector <string> nomes;
+    vector<double> precos, comprimentos,larguras,custo_material; 
+    vector <int> portas_lacadas, gavetas, gavetoes;
+    vector <char> lacagens;
+    
+    string nm, tm, lacagem, g_g;
+    
+    int ni = 0, n_gavetas=0, n_gavetoes=0, pl=0;
+    double pt = 0, c = 0, l = 0, cm = 0, pm = 0, cp=0, lp=0;
+    
     cout << "PROGRAMA DE ORCAMENTOS" << endl << endl << endl;
-
-    int ni = 0;
-    double pt = 0;
 
     cout << "Numero de itens?" << endl;
     cin >> ni;
@@ -19,26 +25,6 @@ int main()
         cin >> ni;
     }
 
-    vector <string> nomes;
-    vector<int> precos;
-    vector <int> comprimentos;
-    vector <int> larguras;
-    vector <int> custo_material;
-    vector <char> lacagens;
-    vector <int> portas_lacadas;
-    vector <int> gavetas;
-    vector <int> gavetoes;
-
-    double c = 0, l = 0, cm = 0, pm = 0;
-    string nm;
-    string tm;
-    string lacagem;
-    int pl=0;
-    double cp;
-    double lp;
-    string g_g;
-    int n_gavetas=0, n_gavetoes=0;
-    
     for (int i = 0; i < ni; i++)
     {
         n_gavetas=0;
