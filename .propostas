@@ -97,7 +97,7 @@ int main()
                 cin >> lacagem;
             }
             
-            cout << "Numero de portas lacadas?" << endl;
+            cout << "Numero de portas lacadas? (0 no caso de o móvel ser todo lacado)" << endl;
             cin >> pl;
             while (pl < 0) {
                 cout << "Erro" << endl << "Numero de portas lacadas?" << endl <<endl;
@@ -166,7 +166,7 @@ int main()
                 cin >> lacagem;
             }
             
-            cout << "Numero de portas lacadas?" << endl;
+            cout << "Numero de portas lacadas? (0 no caso de o móvel ser todo lacado)" << endl;
             cin >> pl;
             while (pl < 0) {
                 cout << "Erro" << endl << "Numero de portas lacadas?" << endl <<endl;
