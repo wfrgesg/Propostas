@@ -1,0 +1,267 @@
+#include <iostream>
+using namespace std;
+#include <vector>
+
+int main()
+{
+
+    cout << "PROGRAMA DE ORCAMENTOS" << endl << endl << endl;
+
+    int ni = 0;
+    double pt = 0;
+
+    cout << "Numero de itens?" << endl;
+    cin >> ni;
+   
+    while (ni<=0)
+    {
+        cout << "Numero de itens invalido" << endl << "Numero de itens?" << endl;
+        cin >> ni;
+    }
+
+    vector <string> nomes;
+    vector<int> precos;
+    vector <int> comprimentos;
+    vector <int> larguras;
+    vector <int> custo_material;
+    vector <char> lacagens;
+    vector <char> portas_lacadas;
+    vector <int> gavetas;
+    vector <int> gavetoes;
+
+    double c = 0, l = 0, cm = 0, pm = 0;
+    string nm;
+    string tm;
+    string lacagem;
+    string pl;
+    string cp;
+    string lp;
+    string g_g;
+    int n_gavetas=0, n_gavetoes=0;
+    
+    for (int i = 0; i < ni; i++)
+    {
+        n_gavetas=0;
+        n_gavetoes=0;
+        
+        cout << "Nome do movel" << endl;
+        cin >> nm;
+
+        cout << "Cozinha? (sim/nao)" << endl;
+        cin >> tm;
+
+        while (tm != "sim" && tm != "nao") {
+            cout << "Erro" << endl << "Cozinha? (sim/nao)" << endl;
+            cin >> tm;
+        }
+        
+        cout<< "Gavetas/Gavetoes?(sim/nao)";
+        cin g_g;
+        while (g_g != "sim" && g_g != "nao") {
+                cout << "Erro" << endl << "Gavetas/Gavetoes?(sim/nao)" << endl <<endl;
+                cin >> g_g;
+            }
+            
+        if(g_g=="sim"){
+        cout << "Numero de gavetoes?" << endl;
+        cin >> n_gavetoes;
+        
+        while (n_gavetoes <= 0) {
+                cout << "Numero de gavetoes invalido" << endl << "Numero de gavetoes?" << endl;
+                cin >> n_gavetoes;
+            }
+            
+        cout << "Numero de gavetas?" << endl;
+        cin >> n_gavetas;
+        
+        while (n_gavetas <= 0) {
+                cout << "Numero de gavetas invalido" << endl << "Numero de gavetas?" << endl;
+                cin >> n_gavetas;
+            }
+            }
+       
+        if (tm == "sim") {
+            cout << "Comprimento?" << endl;
+            cin >> c;
+
+            while (c <= 0) {
+                cout << "Comprimento invalido" << endl << "Comprimento?" << endl;
+                cin >> c;
+            }
+
+            cout << "Largura?"<<endl;
+            cin >> l;
+            while (l <= 0) {
+                cout << "Largura invalida" << endl << "Largura?" << endl;
+                cin >> l;
+            }
+
+            cout << "Custo material (m2)?" << endl;
+            cin >> cm;
+            while (cm <= 0) {
+                cout << "Erro" << endl << "Custo material (m2)?" << endl;
+                cin >> cm;
+            }
+
+
+            cout << "Lacagem?(sim/nao)" << endl;
+            cin >> lacagem;
+            while (lacagem != "sim" && lacagem != "nao") {
+                cout << "Erro" << endl << "Lacagem?(sim/nao)" << endl <<endl;
+                cin >> lacagem;
+            }
+            
+            cout << "Portas lacadas?(sim/nao)" << endl;
+            cin >> pl;
+            while (pl != "sim" && pl != "nao") {
+                cout << "Erro" << endl << "Portas lacadas?(sim/nao)" << endl <<endl;
+                cin >> pl;
+            }
+            
+            if(pl == "sim"){
+                cout << "Comprimento da porta?"
+                cin >> cp;
+            while (cp <= 0) {
+                cout << "Comprimento invalido" << endl << "Comprimento da porta?" << endl;
+                cin >> cp;
+            }
+            
+                cout << "Largura da porta?"
+                cin >> lp;
+            while (lp <= 0) {
+                cout << "Largura invalido" << endl << "Largura da porta?" << endl;
+                cin >> lp;
+            }
+            }
+            
+            if (lacagem == "sim")
+            {
+                pm = cm * c;
+            }
+            else {
+                pm = cm * c + 70 * c * l;
+            }
+            
+            if(pl == "sim"){
+                pm = pm + 70*lp*cp
+            }
+            
+        }
+
+        if (tm == "nao") {
+
+            cout << "Comprimento?" << endl;
+            cin >> c;
+
+            while (c <= 0) {
+                cout << "Comprimento invalido" << endl << "Comprimento?" << endl;
+                cin >> c;
+            }
+
+            cout << "Largura?"<<endl;
+            cin >> l;
+            while (l <= 0) {
+                cout << "Largura invalida" << endl << "Largura?" << endl;
+                cin >> l;
+            }
+
+            cout << "Custo material (m2)?" << endl;
+            cin >> cm;
+            while (cm <= 0) {
+                cout << "Erro" << endl << "Custo material (m2)?" << endl;
+                cin >> cm;
+            }
+
+            cout << "Lacagem?(sim/nao)" << endl;
+            cin >> lacagem;
+
+            while (lacagem != "sim" && lacagem != "nao") {
+                cout << "Erro" << endl << "Lacagem?(sim/nao)" << endl << endl ;
+                cin >> lacagem;
+            }
+            
+            cout << "Portas lacadas?(sim/nao)" << endl;
+            cin >> pl;
+            while (pl != "sim" && pl != "nao") {
+                cout << "Erro" << endl << "Portas lacadas?(sim/nao)" << endl <<endl;
+                cin >> pl;
+            }
+            
+            if(pl == "sim"){
+                cout << "Comprimento da porta?"
+                cin >> cp;
+            while (cp <= 0) {
+                cout << "Comprimento invalido" << endl << "Comprimento da porta?" << endl;
+                cin >> cp;
+            }
+            
+                cout << "Largura da porta?"
+                cin >> lp;
+            while (lp <= 0) {
+                cout << "Largura invalido" << endl << "Largura da porta?" << endl;
+                cin >> lp;
+            }
+            }
+            
+            if (lacagem == "nao")
+            {
+                pm = cm * c*l;
+            }
+            else {
+                pm = cm * c + 70 * c * l;
+            }
+            
+            if(pl == "sim"){
+                pm = pm + 70*lp*cp
+            }
+
+        }
+        nomes.push_back(nm);
+        precos.push_back(pm);
+        comprimentos.push_back(c);
+        larguras.push_back(l);
+        custo_material.push_back(cm);
+        if (lacagem == "nao") {
+            lacagens.push_back('N');
+        }
+        else {
+            lacagens.push_back('S');
+        }
+        
+        if (pl == "nao") {
+            portas_lacadas.push_back('N');
+        }
+        else {
+            portas_lacadas.push_back('S');
+        }
+        
+        if (g_g == "nao") {
+            gavetas.push_back('N');
+            gavetoes.push_back('N');
+        }
+        if(g_g=="sim" && n_gavetas>0 && n_gavetoes>0) {
+            gavetas.push_back('S');
+            gavetoes.push_back('S');
+        }
+        if(g_g=="sim" && n_gavetas=0 && n_gavetoes>0) {
+            gavetas.push_back('N');
+            gavetoes.push_back('S');
+        }
+        if(g_g=="sim" && n_gavetas>0 && n_gavetoes=0) {
+            gavetas.push_back('S');
+            gavetoes.push_back('N');
+        }
+        
+        if (g_g == "sim"){
+            pm=pm+80*n_gavetas+100*n_gavetoes;
+            }
+        
+        pt = pt + pm;
+    }
+    for (int j = 0; j < ni; j++)
+    {
+        cout << endl << endl << "Movel: " << nomes[j] << endl << "Valor: " << precos[j] << endl << "Comprimento: " << comprimentos[j] << endl << "largura: " << larguras[j] << endl << "Custo material(m2): " << custo_material[j] << endl << "Lacagem: " << lacagens[j]<<endl<<portas_lacadas[j]<<endl << gavetas[j]<<endl<< gavetoes[j]<<endl <<endl <<endl;
+    }
+    cout << "Proposta total: " << pt << endl << endl;
+    return 0;
+ }
