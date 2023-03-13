@@ -9,7 +9,7 @@ int main(){
 string nome_ficheiro = "Precos_Material.cvs";
 string material;
 vector <string> ax; 
-int d=0;
+int d;
 double preco;
 char confirmacao;
 
@@ -28,20 +28,36 @@ if(f.is_open()){
         getline(s,aux,','); ax.push_back(aux);
     }
     }
-    f.close();
 }
-
+for(int k=0;k<ax.size()/2;k=k+2){
+    for(int zz=k+2; zz<ax.size()/2;zz=zz+2){
+        if(ax[zz]<ax[k]){
+            string a;
+            string b;
+            a=ax[zz];
+            b=ax[zz+1];
+            ax[zz]=ax[k];
+            ax[zz+1]=ax[k+1];
+            ax[k]=a;
+            ax[k+1]=b;
+        }
+    }
+}
 cout << "Nome do material em causa? (Tem de estar de acordo com o criado no ficheiro!!)" << endl; 
 cin >> material;
 
 for (int j=0; j<ax.size()/2; j=j+2){
+    d=0;
     if(ax[j] == material){
-        d=1; cout << "Preço do materail é:" << ax[j+1] << "?(S/N)";
-    } 
-    cin >> confirmacao;
-    if (confirmacao=='N'){
-        cout << "Qual o preço?" << endl; cin >> preco; 
-        d==-1; 
+        d=1; 
+        cout << "Preço do materail é:" << ax[j+1] << "?(S/N)";
+        cin >> confirmacao;
+        if (confirmacao=='N'){
+            cout << "Qual o preço?" << endl; 
+            cin >> preco;
+            d==-1;
+        }
+    confirmacao = 'T';
     }
 }
 if(d==0){ 
@@ -50,11 +66,40 @@ if(d==0){
     cin >> material; 
     cout << "Preço do material?";
     cin >> preco; 
-    (escrever código de escrita no ficheiro)
-} 
+    ax.push_back(material);
+    ax.push_back(to_string(preco));
+    for(int k=0;k<ax.size()/2;k=k+2){
+        for(int zz=k+2; zz<ax.size()/2;zz=zz+2){
+            if(ax[zz]<ax[k]){
+                string a;
+                string b;
+                a=ax[zz];
+                b=ax[zz+1];
+                ax[zz]=ax[k];
+                ax[zz+1]=ax[k+1];
+                ax[k]=a;
+                ax[k+1]=b;
+            }
+        }
+    }
+    ofstream f(nome_ficheiro);
+    for (int ff=0; ff<ax.size(); ff=ff+2){
+        f << ax[ff] << "," << ax[ff+1] << endl;
+    }
+}
 
 if(d==-1){ 
-    (escrever código de escrita no ficheiro) 
+    for(int k=0;k<ax.size()/2;k=k+2){
+        if(ax[k]==material){
+            ax[k+1]=preco;
+        }
+    }
+    ofstream f(nome_ficheiro);
+    for (int ff=0; ff<ax.size(); ff=ff+2){
+        f << ax[ff] << "," << ax[ff+1] << endl;
+    }   
 }  
+
+f.close();
 
 }
