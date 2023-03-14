@@ -3,12 +3,14 @@ using namespace std;
 #include <vector>
 #include <sstream>
 #include <fstream>
+#include <algorithm>
 
 int main(){
     
 string nome_ficheiro = "Book2.csv";
 string material;
-vector <string> ax, ax2; 
+vector <string> ax; 
+vector <string> ax2;
 int d;
 double preco;
 char confirmacao;
@@ -60,7 +62,7 @@ d=0;
 for (int j=0; j<(ax.size())-1; j=j+2){
     if(ax[j] == material){
         d=1; 
-        cout << "Preço do materail é:" << ax[j+1] << "?(S/N)";
+        cout << "Preço do materail é:" << ax[j+1] << "?(S/N)" << endl;
         cin >> confirmacao;
         if (confirmacao=='N'){
             cout << "Qual o preço?" << endl; 
@@ -82,7 +84,7 @@ if(d==0){
     ax.push_back(material);
     ax.push_back(to_string(preco));
 
-    ofstream f(nome_ficheiro, ios::out);
+    ofstream f(nome_ficheiro);
 
     for (int ff=0; ff<(ax.size())-1; ff=ff+2){
         f << ax[ff] << "," << ax[ff+1] << endl; 
@@ -91,22 +93,34 @@ if(d==0){
 }
 
 if(d==-1){ 
-    for(int k=0;k<(ax.size())-1;k=k+2){
-        ax2.push_back(ax[k]);
-        if(ax[k]==material){
+    for (int oo=0; oo<(ax.size())-1; oo=oo+2){
+        string c = ax[oo];
+        string d = ax[oo+1];
+        ax2.push_back(c);
+        if(ax[oo]==material){
             ax2.push_back(to_string(preco));
         }
         else{
-            ax2.push_back(ax[k+1]);
+            ax2.push_back(d);
         }
-    }
+        }
     
-    ofstream f(nome_ficheiro, ios::out);
+    ax.clear();
+    
+    for (int oo=0; oo<(ax2.size())-1; oo++){
+        string e = ax[oo];  
+        ax.push_back(e);
+    }
 
-    for (int ff=0; ff<(ax2.size())-1; ff=ff+2){
-        f << ax2[ff] << "," << ax2[ff+1] << endl; 
+    ax2.clear();    
+    
+    ofstream f(nome_ficheiro);
+
+    for (int oo=0; oo<(ax.size())-1; oo=oo+2){
+        f << ax[oo] << "," << ax[oo+1] << endl; 
     } 
-    f.close(); 
+    f.close();
 }
+
 return 0;  
 }
