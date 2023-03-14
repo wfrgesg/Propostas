@@ -1,0 +1,45 @@
+#include <iostream>
+using namespace std;
+#include <vector>
+#include <sstream>
+#include <fstream>
+
+void cria_ficheiro_proposta(){
+    
+    string cliente, obra;
+    int numero_parcelas=0;
+    
+    // determinação de parâmetros para o nome do ficheiro
+    cout << "Cliente?" << endl;
+    cin >> cliente;
+    cout << "Obra?" << endl;
+    cin >> obra;
+    
+    // criação do nome do ficheiro
+    string doc_final = cliente;
+    doc_final.append("_");
+    doc_final.append("obra");
+    doc_final.append(".csv");
+
+    vector <string> nomes;
+    nomes.push_back("Mugo");
+    nomes.push_back("Parla");
+    
+    // escrita no ficheiro final, necessário criar vetor de strings que guarda os materiais usados em cada item
+    ofstream a(doc_final);
+    if(a.is_open()==true){
+        for (int aa=0; aa<2; aa++){
+            if(nomes[aa][0] =='M'){
+                a << nomes[aa] << "," << "Móvel c/" << endl;
+            }
+            if(nomes[aa][0] =='P'){
+                a << nomes[aa] << "," << "Porta c/" << endl;
+            }
+            numero_parcelas++;
+    } 
+        a << "Proposta total" << "," << 1000 << endl; 
+        numero_parcelas++;
+    }
+    
+    a.close();     
+}
