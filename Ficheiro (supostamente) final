@@ -115,8 +115,6 @@ int main()
             for(int k=0;k<ax.size()/2;k=k+2){
                 for(int zz=k+2; zz<ax.size()/2;zz=zz+2){
                     if(ax[zz]<ax[k]){
-                        string a;
-                        string b;
                         a=ax[zz];
                         b=ax[zz+1];
                         ax[zz]=ax[k];
