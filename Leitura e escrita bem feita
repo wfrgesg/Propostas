@@ -61,18 +61,18 @@ d=0;
 
 for (int j=0; j<(ax.size())-1; j=j+2){
     if(ax[j] == material){
-        d=1; 
         cout << "Preço do materail é:" << ax[j+1] << "?(S/N)" << endl;
         cin >> confirmacao;
         if (confirmacao=='N'){
             cout << "Qual o preço?" << endl; 
             cin >> preco;
-            d==-1;
+            d=-1;
+            break;
         }
         if(confirmacao=='S'){
             d=2;
+            break;
         }
-    confirmacao = 'T';
     }
 }
 if(d==0){ 
@@ -94,22 +94,19 @@ if(d==0){
 
 if(d==-1){ 
     for (int oo=0; oo<(ax.size())-1; oo=oo+2){
-        string c = ax[oo];
-        string d = ax[oo+1];
-        ax2.push_back(c);
+        ax2.push_back(ax[oo]);
         if(ax[oo]==material){
             ax2.push_back(to_string(preco));
         }
         else{
-            ax2.push_back(d);
+            ax2.push_back(ax[oo+1]);
         }
         }
     
     ax.clear();
     
     for (int oo=0; oo<(ax2.size())-1; oo++){
-        string e = ax[oo];  
-        ax.push_back(e);
+        ax.push_back(ax2[oo]);
     }
 
     ax2.clear();    
