@@ -95,7 +95,7 @@ int main()
                     cout << "Qual o preço?" << endl; 
                     cin >> preco;
                     cm=preco;
-                    d==-1;
+                    d=-1;
                 }
                 if(confirmação=='S'){
                     cm = ax[j+1];
