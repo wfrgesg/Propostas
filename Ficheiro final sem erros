@@ -297,14 +297,14 @@ int main()
             
             if (lacagem == "nao")
             {
-                pm = (cm * c*l)*margem;
+                pm = (cm * c*l)*(1+margem);
             }
             else {
-                pm = (cm * c + 70 * c * l)*margem;
+                pm = (cm * c + 70 * c * l)*(1+margem);
             }
             
             if(pl >0){
-                pm = (pm + 70*lp*cp)*margem;
+                pm = (pm + 70*lp*cp)*(1+margem);
             }
 
         }
