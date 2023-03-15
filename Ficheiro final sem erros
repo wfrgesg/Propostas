@@ -102,7 +102,6 @@ for(int k=0;k<(ax.size())-1;k=k+2){
 
 
     cout << "Nome do material em causa? (Tem de estar de acordo com o criado no ficheiro!!)" << endl; 
-    cout << ax.size();
     for (int j=0; j<(ax.size())-1; j=j+2){
         cout << ax[j] <<endl;
     }
