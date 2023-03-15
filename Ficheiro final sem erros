@@ -149,22 +149,10 @@ for(int k=0;k<(ax.size())-1;k=k+2){
 
     if(d==-1){ 
         for (int oo=0; oo<(ax.size())-1; oo=oo+2){
-            ax2.push_back(ax[oo]);
             if(ax[oo]==material){
-                ax2.push_back(to_string(preco));
-            }
-            else{
-                ax2.push_back(ax[oo+1]);
+                ax[oo+1]=to_string(preco);
             }
         }
-    
-        ax.clear();
-    
-        for (int oo=0; oo<(ax2.size())-1; oo++){
-            ax.push_back(ax2[oo]);
-        }
-
-        ax2.clear();    
     
         ofstream f(nome_ficheiro);
 
