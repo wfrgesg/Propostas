@@ -34,31 +34,31 @@ int main()
     ifstream f(nome_ficheiro);
 
     if(f.is_open()){
-    while(getline(f,str)){
-    stringstream s;
-    s<<str; 
-    string aux; 
-    while(s.good()){ 
-        getline(s,aux,','); 
-        ax.push_back(aux);
+        while(getline(f,str)){
+        stringstream s;
+        s<<str; 
+        string aux; 
+            while(s.good()){ 
+            getline(s,aux,','); 
+            ax.push_back(aux);
+            }
+        }
     }
-    }
-}
 
     f.close();
 
-for(int k=0;k<(ax.size())-1;k=k+2){
-    for(int zz=0; zz<ax.size();zz=zz+2){
-        if(ax[zz]>ax[k]){
-            a=ax[zz];
-            b=ax[zz+1];
-            ax[zz]=ax[k];
-            ax[zz+1]=ax[k+1];
-            ax[k]=a;
-            ax[k+1]=b;
+    for(int k=0;k<(ax.size())-1;k=k+2){
+        for(int zz=0; zz<ax.size();zz=zz+2){
+            if(ax[zz]>ax[k]){
+                a=ax[zz];
+                b=ax[zz+1];
+                ax[zz]=ax[k];
+                ax[zz+1]=ax[k+1];
+                ax[k]=a;
+                ax[k+1]=b;
+            }
         }
     }
-}
 
     cout << "Cliente?" << endl;
     cin >> cliente;
@@ -113,10 +113,10 @@ for(int k=0;k<(ax.size())-1;k=k+2){
 
     for (int j=0; j<(ax.size())-1; j=j+2){
         if(ax[j] == material){
-            cout << "Preço do materail é:" << ax[j+1] << "?(S/N)" << endl;
+            cout << "Preco do materail:" << ax[j+1] << "?(S/N)" << endl;
             cin >> confirmacao;
             if (confirmacao=='N'){
-                cout << "Qual o preço?" << endl; 
+                cout << "Qual o preco?" << endl; 
                 cin >> preco;
                 cm = preco;
                 d=-1;
@@ -130,10 +130,10 @@ for(int k=0;k<(ax.size())-1;k=k+2){
         }
     }
     if(d==0){ 
-        cout << "Material não existe! Quer adicionar?" << endl; 
+        cout << "Material nao existe! Quer adicionar?" << endl; 
         cout << "Nome do material a adicionar?";
         cin >> material; 
-        cout << "Preço do material a adicionar?";
+        cout << "Preco do material a adicionar?";
         cin >> preco;
         cm = preco; 
         ax.push_back(material);
@@ -272,7 +272,7 @@ for(int k=0;k<(ax.size())-1;k=k+2){
                 cin >> lacagem;
             }
             
-            std::cout << "Numero de portas lacadas? (0 no caso de o móvel ser todo lacado)" << endl;
+            std::cout << "Numero de portas lacadas? (0 no caso de o movel ser todo lacado)" << endl;
             cin >> pl;
             while (pl < 0) {
                 std::cout << "Erro" << endl << "Numero de portas lacadas?" << endl <<endl;
@@ -337,11 +337,13 @@ for(int k=0;k<(ax.size())-1;k=k+2){
     // escrita no ficheiro final, necessário criar vetor de strings que guarda os materiais usados em cada item
     ofstream ll(doc_final);
 
+    ll << "Nome movel" << "," << "Movel detalhado" << "," << "Preco individual" << endl;
+
     for (int j = 0; j < ni; j++)
     {
         std::cout << endl << endl << "Movel: " << nomes[j] << endl << "Valor: " << precos[j] << endl << "Comprimento: " << comprimentos[j] << endl << "largura: " << larguras[j] << endl << "Custo material(m2): " << custo_material[j] << endl << "Lacagem: " << lacagens[j]<<endl<<"Portas lacadas: "<<portas_lacadas[j]<<endl <<"Gavetas: "<< gavetas[j]<<endl<<"Gavetoes: "<< gavetoes[j]<<endl <<endl <<endl;
         if(nomes[j][0]=='M'){
-          ll << nomes[j] << "," << "Móvel c/" << comprimentos[j]*100 << "x" << larguras[j]*100 << "cm " << "em " << materiais[j] << "," << precos[j] << endl;
+          ll << nomes[j] << "," << "Movel c/" << comprimentos[j]*100 << "x" << larguras[j]*100 << "cm " << "em " << materiais[j] << "," << precos[j] << endl;
         }
         if(nomes[j][0]=='P'){
           ll << nomes[j] << "," << "Porta c/" << comprimentos[j]*100 << "x" << larguras[j]*100 << "cm " << "em " << materiais[j] << "," << precos[j] << endl;
