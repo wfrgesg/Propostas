@@ -119,11 +119,13 @@ for(int k=0;k<(ax.size())-1;k=k+2){
             if (confirmacao=='N'){
                 cout << "Qual o preço?" << endl; 
                 cin >> preco;
+                cm = preco;
                 d=-1;
                 break;
             }
             if(confirmacao=='S'){
                 d=2;
+                cm = stod(ax[j+1]);
                 break;
             }
         }
@@ -351,10 +353,10 @@ for(int k=0;k<(ax.size())-1;k=k+2){
     {
         std::cout << endl << endl << "Movel: " << nomes[j] << endl << "Valor: " << precos[j] << endl << "Comprimento: " << comprimentos[j] << endl << "largura: " << larguras[j] << endl << "Custo material(m2): " << custo_material[j] << endl << "Lacagem: " << lacagens[j]<<endl<<"Portas lacadas: "<<portas_lacadas[j]<<endl <<"Gavetas: "<< gavetas[j]<<endl<<"Gavetoes: "<< gavetoes[j]<<endl <<endl <<endl;
         if(nomes[j][0]=='M'){
-          ll << nomes[j] << "," << "Móvel c/" << comprimentos[j]*100 << "x" << larguras[j]*100 << "cm " << "em " << material[j] << "," << precos[j] << endl;
+          ll << nomes[j] << "," << "Móvel c/" << comprimentos[j]*100 << "x" << larguras[j]*100 << "cm " << "em " << materiais[j] << "," << precos[j] << endl;
         }
         if(nomes[j][0]=='P'){
-          ll << nomes[j] << "," << "Porta c/" << comprimentos[j]*100 << "x" << larguras[j]*100 << "cm " << "em " << material[j] << "," << precos[j] << endl;
+          ll << nomes[j] << "," << "Porta c/" << comprimentos[j]*100 << "x" << larguras[j]*100 << "cm " << "em " << materiais[j] << "," << precos[j] << endl;
         }
         numero_parcelas++;
     }
