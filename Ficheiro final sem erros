@@ -134,7 +134,8 @@ for(int k=0;k<(ax.size())-1;k=k+2){
         cout << "Nome do material a adicionar?";
         cin >> material; 
         cout << "Preço do material a adicionar?";
-        cin >> preco; 
+        cin >> preco;
+        cm = preco; 
         ax.push_back(material);
         ax.push_back(to_string(preco));
 
