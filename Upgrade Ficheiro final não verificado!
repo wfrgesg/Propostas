@@ -1,0 +1,386 @@
+#include <iostream>
+using namespace std;
+#include <vector>
+#include <sstream>
+#include <fstream>
+
+int main()
+{
+    vector <string> nomes, ax, ax2, materiais;
+    vector <double> precos, comprimentos,larguras,custo_material; 
+    vector <int> portas_lacadas, gavetas, gavetoes;
+    vector <char> lacagens;
+    string nm, tm, lacagem, g_g, material, nome_ficheiro = "Precos_Material.csv", str, a, b, aux, cliente, obra;
+    stringstream s;
+    int ni = 0, n_gavetas=0, n_gavetoes=0, pl=0, d, numero_parcelas=0;
+    double pt = 0, c = 0, l = 0, cm = 0, pm = 0, cp=0, lp=0, preco=0, margem=0.3;
+    char confirmacao;
+    
+    cout << "PROGRAMA DE ORCAMENTOS" << endl << endl << endl;
+
+    cout << "Numero de itens?" << endl;
+    cin >> ni;
+   
+    while (ni<=0)
+    {
+        cout << "Numero de itens invalido" << endl << "Numero de itens?" << endl;
+        cin >> ni;
+    }
+
+    if(nome_ficheiro.empty()==true){
+        cout << "Ficheiro não encontrado. Verificar se Precos_Material.cvs existe";
+    }
+    
+    ifstream f(nome_ficheiro);
+
+    if(f.is_open()){
+        while(getline(f,str)){
+        stringstream s;
+        s<<str; 
+        string aux; 
+            while(s.good()){ 
+            getline(s,aux,','); 
+            ax.push_back(aux);
+            }
+        }
+    }
+
+    f.close();
+
+    for(int k=0;k<(ax.size())-1;k=k+2){
+        for(int zz=0; zz<ax.size();zz=zz+2){
+            if(ax[zz]>ax[k]){
+                a=ax[zz];
+                b=ax[zz+1];
+                ax[zz]=ax[k];
+                ax[zz+1]=ax[k+1];
+                ax[k]=a;
+                ax[k+1]=b;
+            }
+        }
+    }
+
+    cout << "Cliente?" << endl;
+    cin >> cliente;
+    std::cout << "Obra?" << endl;
+    cin >> obra;
+
+    string doc_final = cliente;
+    doc_final.append("_");
+    doc_final.append(obra);
+    doc_final.append(".csv");
+
+    for (int i = 0; i < ni; i++)
+    {
+        n_gavetas=0;
+        n_gavetoes=0;
+        
+        cout << "Nome do movel" << endl;
+        cin >> nm;
+
+        cout << "Cozinha? (sim/nao)" << endl;
+        cin >> tm;
+
+        while (tm != "sim" && tm != "nao") {
+            cout << "Erro" << endl << "Cozinha? (sim/nao)" << endl;
+            cin >> tm;
+        }
+
+        for(int k=0;k<(ax.size())-1;k=k+2){
+            for(int zz=0; zz<ax.size();zz=zz+2){
+                if(ax[zz]>ax[k]){
+                    a=ax[zz];
+                    b=ax[zz+1];
+                    ax[zz]=ax[k];
+                    ax[zz+1]=ax[k+1];
+                    ax[k]=a;
+                    ax[k+1]=b;
+                }
+            }
+        }
+
+
+    cout << "Nome do material em causa? (Tem de estar de acordo com o criado no ficheiro!!)" << endl << endl; 
+    for (int j=0; j<(ax.size())-1; j=j+2){
+        cout << ax[j] <<endl;
+    }
+
+    std::cout << endl;
+
+    cin >> material;
+    materiais.push_back(material);
+
+    d=0;
+
+    for (int j=0; j<(ax.size())-1; j=j+2){
+        if(ax[j] == material){
+            cout << "Preco do materail:" << ax[j+1] << "?(S/N)" << endl;
+            cin >> confirmacao;
+            while (confirmacao != 'sim' && confirmacao != 'nao') {
+                cout << "Erro" << endl << "Preco do materail:" << ax[j+1] << "?(S/N)" << endl;
+                cin >> tm;
+            }
+            if (confirmacao=='N'){
+                cout << "Qual o preco?" << endl; 
+                cin >> preco;
+                while (preco =< 0) {
+                    std::cout << "Erro" << endl << "Preco do material a adicionar?" << endl <<endl;
+                    cin >> preco;
+                }
+                cm = preco;
+                d=-1;
+                break;
+            }
+            if(confirmacao=='S'){
+                d=2;
+                cm = stod(ax[j+1]);
+                break;
+            }
+        }
+    }
+    if(d==0){ 
+        cout << "Material nao existe! Quer adicionar?" << endl; 
+        cout << "Nome do material a adicionar?";
+        cin >> material; 
+        cout << "Preco do material a adicionar?";
+        cin >> preco;
+        while (preco =< 0) {
+            std::cout << "Erro" << endl << "Preco do material a adicionar?" << endl <<endl;
+            cin >> preco;
+        }
+        cm = preco; 
+        ax.push_back(material);
+        ax.push_back(to_string(preco));
+
+        ofstream f(nome_ficheiro);
+
+        for (int ff=0; ff<(ax.size())-1; ff=ff+2){
+            f << ax[ff] << "," << ax[ff+1] << endl; 
+        }
+        f.close();
+    }
+
+    if(d==-1){ 
+        for (int oo=0; oo<(ax.size())-1; oo=oo+2){
+            if(ax[oo]==material){
+                ax[oo+1]=to_string(preco);
+            }
+        }
+    
+        ofstream f(nome_ficheiro);
+
+        for (int oo=0; oo<(ax.size())-1; oo=oo+2){
+            f << ax[oo] << "," << ax[oo+1] << endl; 
+        } 
+        f.close();
+    }
+        
+        std::cout<< "Gavetas/Gavetoes?(sim/nao)"<<endl;
+        cin >> g_g;
+        while (g_g != "sim" && g_g != "nao") {
+                std::cout << "Erro" << endl << "Gavetas/Gavetoes?(sim/nao)" << endl <<endl;
+                cin >> g_g;
+            }
+            
+        if(g_g=="sim"){
+        std::cout << "Numero de gavetoes?" << endl;
+        cin >> n_gavetoes;
+        
+        while (n_gavetoes < 0) {
+                std::cout << "Numero de gavetoes invalido" << endl << "Numero de gavetoes?" << endl;
+                cin >> n_gavetoes;
+            }
+            
+        std::cout << "Numero de gavetas?" << endl;
+        cin >> n_gavetas;
+        
+        while (n_gavetas < 0) {
+                std::cout << "Numero de gavetas invalido" << endl << "Numero de gavetas?" << endl;
+                cin >> n_gavetas;
+            }
+            }
+       
+        if (tm == "sim") {
+            std::cout << "Comprimento?" << endl;
+            cin >> c;
+
+            while (c <= 0) {
+                std::cout << "Comprimento invalido" << endl << "Comprimento?" << endl;
+                cin >> c;
+            }
+
+            std::cout << "Largura?"<<endl;
+            cin >> l;
+            while (l <= 0) {
+                std::cout << "Largura invalida" << endl << "Largura?" << endl;
+                cin >> l;
+            }
+
+            std::cout << "Lacagem?(sim/nao)" << endl;
+            cin >> lacagem;
+            while (lacagem != "sim" && lacagem != "nao") {
+                std::cout << "Erro" << endl << "Lacagem?(sim/nao)" << endl <<endl;
+                cin >> lacagem;
+            }
+            
+            std::cout << "Numero de portas lacadas? (0 no caso de o móvel ser todo lacado)" << endl;
+            cin >> pl;
+            while (pl < 0) {
+                std::cout << "Erro" << endl << "Numero de portas lacadas?" << endl <<endl;
+                cin >> pl;
+            }
+            
+            if(pl > 0){
+                std::cout << "Comprimento da porta?" << endl;
+                cin >> cp;
+            while (cp <= 0) {
+                std::cout << "Comprimento invalido" << endl << "Comprimento da porta?" << endl;
+                cin >> cp;
+            }
+            
+                std::cout << "Largura da porta?" << endl;
+                cin >> lp;
+            while (lp <= 0) {
+                std::cout << "Largura invalido" << endl << "Largura da porta?" << endl;
+                cin >> lp;
+            }
+            }
+            
+            if (lacagem == "sim")
+            {
+                pm = cm * c;
+            }
+            else {
+                pm = cm * c + 70 * c * l;
+            }
+            
+            if(pl >0){
+                pm = pm + 70*lp*cp;
+            }
+            
+        }
+
+        if (tm == "nao") {
+
+            std::cout << "Comprimento?" << endl;
+            cin >> c;
+
+            while (c <= 0) {
+                std::cout << "Comprimento invalido" << endl << "Comprimento?" << endl;
+                cin >> c;
+            }
+
+            std::cout << "Largura?"<<endl;
+            cin >> l;
+            while (l <= 0) {
+                std::cout << "Largura invalida" << endl << "Largura?" << endl;
+                cin >> l;
+            }
+
+            std::cout << "Lacagem?(sim/nao)" << endl;
+            cin >> lacagem;
+
+            while (lacagem != "sim" && lacagem != "nao") {
+                std::cout << "Erro" << endl << "Lacagem?(sim/nao)" << endl << endl ;
+                cin >> lacagem;
+            }
+            
+            std::cout << "Numero de portas lacadas? (0 no caso de o movel ser todo lacado)" << endl;
+            cin >> pl;
+            while (pl < 0) {
+                std::cout << "Erro" << endl << "Numero de portas lacadas?" << endl <<endl;
+                cin >> pl;
+            }
+            
+            if(pl > 0){
+                std::cout << "Comprimento da porta?"<<endl;
+                cin >> cp;
+            while (cp <= 0) {
+                std::cout << "Comprimento invalido" << endl << "Comprimento da porta?" << endl;
+                cin >> cp;
+            }
+            
+                std::cout << "Largura da porta?" <<endl;
+                cin >> lp;
+            while (lp <= 0) {
+                std::cout << "Largura invalido" << endl << "Largura da porta?" << endl;
+                cin >> lp;
+            }
+            }
+            
+            if (lacagem == "nao")
+            {
+                pm = (cm * c*l)*(1+margem);
+            }
+            else {
+                pm = (cm * c + 70 * c * l)*(1+margem);
+            }
+            
+            if(pl >0){
+                pm = (pm + 70*lp*cp)*(1+margem);
+            }
+
+        }
+
+        nomes.push_back(nm);
+        precos.push_back(pm);
+        comprimentos.push_back(c);
+        larguras.push_back(l);
+        custo_material.push_back(cm);
+        
+        if (lacagem == "nao") {
+            lacagens.push_back('N');
+        }
+        
+        else {
+            lacagens.push_back('S');
+        }
+        
+        portas_lacadas.push_back(pl);
+        gavetas.push_back(n_gavetas);
+        gavetoes.push_back(n_gavetoes);
+       
+        if (g_g == "sim"){
+            pm=pm+80*n_gavetas+100*n_gavetoes;
+            }
+        
+        pt = pt + pm;
+    }
+    
+    ofstream ll(doc_final);
+
+    ll << "Nome movel" << "," << "Movel detalhado" << "," << "Preco individual" << endl;
+
+    for (int j = 0; j < ni; j++)
+    {
+        std::cout << endl << endl << "Movel: " << nomes[j] << endl << "Valor: " << precos[j] << endl << "Comprimento: " << comprimentos[j] << endl << "largura: " << larguras[j] << endl << "Custo material(m2): " << custo_material[j] << endl << "Lacagem: " << lacagens[j]<<endl<<"Portas lacadas: "<<portas_lacadas[j]<<endl <<"Gavetas: "<< gavetas[j]<<endl<<"Gavetoes: "<< gavetoes[j]<<endl <<endl <<endl;
+        if(nomes[j][0]=='M'){
+            if(lacagens[j]== 'S'){
+                ll << nomes[j] << "," << "Movel c/" << comprimentos[j]*100 << "x" << larguras[j]*100 << "cm " << "em " << materiais[j] << " lacado" << "," << precos[j] << endl;
+            }
+            else{
+                ll << nomes[j] << "," << "Movel c/" << comprimentos[j]*100 << "x" << larguras[j]*100 << "cm " << "em " << materiais[j] << "," << precos[j] << endl;
+            }
+        }
+        if(nomes[j][0]=='P'){
+            if(lacagens[j]== 'S'){
+                ll << nomes[j] << "," << "Porta c/" << comprimentos[j]*100 << "x" << larguras[j]*100 << "cm " << "em " << materiais[j] << " lacada" << "," << precos[j] << endl;
+            }
+            else{    
+                ll << nomes[j] << "," << "Porta c/" << comprimentos[j]*100 << "x" << larguras[j]*100 << "cm " << "em " << materiais[j] << "," << precos[j] << endl;
+            }        
+        }
+        numero_parcelas++;
+    }
+    cout << "Proposta total: " << pt << endl << endl;
+    
+    //verificar se ficheiro está vazio, falta fazer!!!
+    
+    if( numero_parcelas==ni){
+        cout << "Ficheiro criado com sucesso!" << endl;
+    }
+    
+    ll.close();     
+    
+    return 0;
+ }
