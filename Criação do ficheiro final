@@ -18,7 +18,7 @@ void cria_ficheiro_proposta(){
     // criação do nome do ficheiro
     string doc_final = cliente;
     doc_final.append("_");
-    doc_final.append("obra");
+    doc_final.append(obra);
     doc_final.append(".csv");
     
     // escrita no ficheiro final, necessário criar vetor de strings que guarda os materiais usados em cada item
